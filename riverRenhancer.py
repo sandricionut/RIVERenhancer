@@ -90,22 +90,21 @@ if __name__ == "__main__":
             pass
         else:
             os.mkdir(tempFolder)
-			
-			
-		arcpy.AddMessage("Temp folder is: " + tempFolder)
+
+        arcpy.AddMessage("Temp folder is: " + tempFolder)
 
         # Input data
-        dem = arcpy.GetParameterAsText(0) # r"d:\Dropbox\Articole\LucianParvulescu\Date\dem.tif"
-        conditionalRaster = arcpy.GetParameterAsText(1) # r"d:\Dropbox\Articole\LucianParvulescu\Date\clc.tif"
+        dem = arcpy.GetParameterAsText(0)
+        conditionalRaster = arcpy.GetParameterAsText(1)
         sampleSize = arcpy.GetParameterAsText(2)
         samplePoints = arcpy.GetParameterAsText(3)
-        finalResult = arcpy.GetParameterAsText(4) #r"d:\Dropbox\Articole\LucianParvulescu\Date", "result.shp"
+        finalResult = arcpy.GetParameterAsText(4)
 
         # Intermediate data - saved in temp folder
-        streamRivers = os.path.join(tempFolder, "sr.tif") #r"d:\Dropbox\Articole\LucianParvulescu\Date\sr.tif"
-        outFlowDir = os.path.join(tempFolder, "outFlowDir.tif") #r"d:\Dropbox\Articole\LucianParvulescu\Date\outFlowDir.tif"
-        streamsRiversPoints = os.path.join(tempFolder, "streamRivers.shp") #r"d:\Dropbox\Articole\LucianParvulescu\Date\streamRivers.shp"
-        outputTextFile = os.path.join(tempFolder, "textRE.txt") #r"d:\Dropbox\Articole\LucianParvulescu\Date\text.txt"
+        streamRivers = os.path.join(tempFolder, "sr.tif")
+        outFlowDir = os.path.join(tempFolder, "outFlowDir.tif")
+        streamsRiversPoints = os.path.join(tempFolder, "streamRivers.shp")
+        outputTextFile = os.path.join(tempFolder, "textRE.txt")
 
         # Setup environment
         arcpy.env.overwriteOutput = True
