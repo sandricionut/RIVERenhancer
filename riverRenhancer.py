@@ -72,7 +72,6 @@ def mCalculate(parameters):
             fText.close()
         else:
             indexValue = -9999
-        # watershed = None
     watershed = None
     shutil.rmtree(tempFolderProcess, ignore_errors =True)
 
@@ -94,11 +93,11 @@ if __name__ == "__main__":
         arcpy.AddMessage("Temp folder is: " + tempFolder)
 
         # Input data
-        dem = arcpy.GetParameterAsText(0)
-        conditionalRaster = arcpy.GetParameterAsText(1)
-        sampleSize = arcpy.GetParameterAsText(2)
-        samplePoints = arcpy.GetParameterAsText(3)
-        finalResult = arcpy.GetParameterAsText(4)
+        dem = sys.argv[1] #arcpy.GetParameterAsText(0)
+        conditionalRaster = sys.argv[2] #arcpy.GetParameterAsText(1)
+        sampleSize = sys.argv[3] #arcpy.GetParameterAsText(2)
+        samplePoints = sys.argv[4] #arcpy.GetParameterAsText(3)
+        finalResult = sys.argv[5] #arcpy.GetParameterAsText(4)
 
         # Intermediate data - saved in temp folder
         streamRivers = os.path.join(tempFolder, "sr.tif")
@@ -157,7 +156,7 @@ if __name__ == "__main__":
 
         # Process result
         arcpy.CreateFeatureclass_management(os.path.dirname(finalResult), os.path.basename(finalResult), geometry_type="POINT", spatial_reference=_spatialReference)
-        arcpy.AddField_management(os.path.join(r"d:\Dropbox\Articole\LucianParvulescu\Date", "result.shp"), field_name="indexValue", field_type="FLOAT", field_precision="8", field_scale="4")
+        arcpy.AddField_management(finalResult, field_name="indexValue", field_type="FLOAT", field_precision="8", field_scale="4")
 
         with arcpy.da.InsertCursor(finalResult, field_names=["SHAPE@XY", "indexValue"]) as rowInsert:
             for row in open(outputTextFile, "r").readlines():
